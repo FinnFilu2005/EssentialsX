@@ -1,0 +1,44 @@
+name: Essentials
+version: 1.0
+author: FinnFilu
+main: de.finnfilu.essentials.Main.Main
+
+commands:
+  fly:
+  gm:
+    aliases: [gm]
+  invsee:
+  setspawn:
+  spawn:
+  time:
+  vanish:
+    aliases: [v]
+  weather:
+  heal:
+  teleport:
+    aliases: [tp]
+  tphere:
+  countdown:
+    aliases: [cd]
+  chatclear:
+    aliases: [cc]
+  kill:
+  spectate:
+    aliases: [spec]
+  clear:
+    aliases: [invclear, clearinv]
+  difficulty:
+    aliases: [dc]
+  warn:
+  warns:
+  removewarn:
+  kick:
+  enderchest:
+    aliases: [ec]
+  burn:
+  slowchat:
+    aliases: [sc]
+  pmute:
+  unmute:
+  inv:
+    aliases: [inventory]

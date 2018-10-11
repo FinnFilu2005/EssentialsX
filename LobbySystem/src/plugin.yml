@@ -1,0 +1,9 @@
+name: LobbySystem
+author: FinnFilu
+version: 1.0
+main: de.finnfilu.lobbysystem.Main.Main
+
+commands:
+  setwarp:
+  warp:
+    aliases: [spawn, lobby, l, hub]

@@ -1,0 +1,7 @@
+name: CoinsSystem
+version: 1.0
+author: FinnFilu
+main: de.finnfilu.coins.Main.Main
+
+commands:
+  coins:

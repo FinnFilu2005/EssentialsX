@@ -1,0 +1,11 @@
+name: ChatManager
+version: 1.0
+author: FinnFilu
+main: de.finnfilu.chatmanager.Main.Main
+
+commands:
+  chatclear:
+    aliases: [cc]
+  slowchat:
+    aliases: [sc]
+  pmute:

@@ -1,0 +1,8 @@
+name: WartungsModus
+version: 1.0
+author: FinnFilu
+main: de.finnfilu.wartungen.Main.Main
+
+commands:
+  wartungen:
+    aliases: [wartung]
