@@ -19,6 +19,8 @@ public class Main extends JavaPlugin {
     private final String noperms = this.getConfig().getString("CoinsSystem.NoPermissions");
     private final String error = this.getConfig().getString("CoinsSystem.Error");
     private final String notplayer = this.getConfig().getString("CoinsSystem.Error");
+    private final int coinsonkill = this.getConfig().getInt("CoinsSystem.GetCoinsOnKill");
+    private final int coinsondeath = this.getConfig().getInt("CoinsSystem.LoseCoinsOnDeath");
 
     @Override
     public void onEnable() {
@@ -57,6 +59,8 @@ public class Main extends JavaPlugin {
         this.getConfig().addDefault("CoinsSystem.NoPermissions", "&cDazu hast du keine Rechte!");
         this.getConfig().addDefault("CoinsSystem.Error", "&cEin Fehler ist aufgetreten!");
         this.getConfig().addDefault("CoinsSystem.NotPlayer", "&cDazu musst du ein Spieler sein!");
+        this.getConfig().addDefault("CoinsSystem.LoseCoinsOnDeath", "1");
+        this.getConfig().addDefault("CoinsSystem.GetCoinsOnKill", "3");
 
         this.saveConfig();
     }
@@ -89,5 +93,13 @@ public class Main extends JavaPlugin {
 
     public String getNotplayer() {
         return prefix.replace("&", "§") + notplayer.replace("&", "§");
+    }
+
+    public int getCoinsonkill() {
+        return coinsonkill;
+    }
+
+    public int getCoinsondeath() {
+        return coinsondeath;
     }
 }

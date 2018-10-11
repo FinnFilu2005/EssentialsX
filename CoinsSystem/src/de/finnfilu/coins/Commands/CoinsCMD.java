@@ -70,83 +70,83 @@ public class CoinsCMD implements CommandExecutor {
                 } else
                     Bukkit.getConsoleSender().sendMessage(Main.getInstance().getPrefix() + "§cBitte benutze: §e/coins <add, remove, set> <Spieler> <Zahlenwert>");
 
-                } else if (sender instanceof Player) {
-                    final Player p = (Player) sender;
+            } else if (sender instanceof Player) {
+                final Player p = (Player) sender;
 
-                    if (args.length == 3) {
-                        if (args[0].equalsIgnoreCase("add")) {
-                            if (p.hasPermission("CoinsSystem.addcoins")) {
+                if (args.length == 3) {
+                    if (args[0].equalsIgnoreCase("add")) {
+                        if (p.hasPermission("CoinsSystem.addcoins")) {
 
-                                int amount = Integer.parseInt(args[2]);
+                            int amount = Integer.parseInt(args[2]);
 
-                                addcoins(Bukkit.getPlayer(args[1]).getName(), amount);
-                                p.sendMessage(Main.getInstance().getPrefix() + "§7Du hast §e" + Bukkit.getPlayer(args[1]).getName() + " " + amount + " Coins §7hinzugefügt.");
+                            addcoins(Bukkit.getPlayer(args[1]).getName(), amount);
+                            p.sendMessage(Main.getInstance().getPrefix() + "§7Du hast §e" + Bukkit.getPlayer(args[1]).getName() + " " + amount + " Coins §7hinzugefügt.");
 
-                            } else
-                                p.sendMessage(Main.getInstance().getNoperms());
-                        } else if (args[0].equalsIgnoreCase("remove")) {
-                            if (p.hasPermission("CoinsSystem.removecoins")) {
+                        } else
+                            p.sendMessage(Main.getInstance().getNoperms());
+                    } else if (args[0].equalsIgnoreCase("remove")) {
+                        if (p.hasPermission("CoinsSystem.removecoins")) {
 
-                                int amount = Integer.parseInt(args[2]);
+                            int amount = Integer.parseInt(args[2]);
 
-                                removecoins(Bukkit.getPlayer(args[1]).getName(), amount);
-                                p.sendMessage(Main.getInstance().getPrefix() + "§7Du hast §e" + Bukkit.getPlayer(args[1]).getName() + " " + amount + " Coins §7entfernt.");
+                            removecoins(Bukkit.getPlayer(args[1]).getName(), amount);
+                            p.sendMessage(Main.getInstance().getPrefix() + "§7Du hast §e" + Bukkit.getPlayer(args[1]).getName() + " " + amount + " Coins §7entfernt.");
 
-                            } else
-                                p.sendMessage(Main.getInstance().getNoperms());
-                        } else if (args[0].equalsIgnoreCase("set")) {
-                            if (p.hasPermission("CoinsSystem.setcoins")) {
+                        } else
+                            p.sendMessage(Main.getInstance().getNoperms());
+                    } else if (args[0].equalsIgnoreCase("set")) {
+                        if (p.hasPermission("CoinsSystem.setcoins")) {
 
-                                int amount = Integer.parseInt(args[2]);
+                            int amount = Integer.parseInt(args[2]);
 
-                                setcoins(Bukkit.getPlayer(args[1]).getName(), amount);
-                                p.sendMessage(Main.getInstance().getPrefix() + "§7Du hast §e" + Bukkit.getPlayer(args[1]).getName() + "'s §7Kontostand auf §e" + amount + " Coins §7gesetzt");
-                            } else
-                                p.sendMessage(Main.getInstance().getNoperms());
-                        }
+                            setcoins(Bukkit.getPlayer(args[1]).getName(), amount);
+                            p.sendMessage(Main.getInstance().getPrefix() + "§7Du hast §e" + Bukkit.getPlayer(args[1]).getName() + "'s §7Kontostand auf §e" + amount + " Coins §7gesetzt");
+                        } else
+                            p.sendMessage(Main.getInstance().getNoperms());
+                    }
 
-                    } else if (args.length == 1) {
+                } else if (args.length == 1) {
 
-                        File file = new File("plugins//CoinsSystem//playerdata//" + Bukkit.getPlayer(args[0]).getName() + ".yml");
-                        if (!file.exists()) {
-                            try {
-                                file.createNewFile();
-                                YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-                                cfg.addDefault("CoinsSystem.Coins", "0");
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        } else if (file.exists()) {
-
+                    File file = new File("plugins//CoinsSystem//playerdata//" + Bukkit.getPlayer(args[0]).getName() + ".yml");
+                    if (!file.exists()) {
+                        try {
+                            file.createNewFile();
                             YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-                            int amount = cfg.getInt("CoinsSystem.Coins");
-
-                            p.sendMessage(Main.getInstance().getPrefix() + "§e" + Bukkit.getPlayer(args[0]).getName() + "'s §7Kontostand: §e" + amount);
+                            cfg.addDefault("CoinsSystem.Coins", "0");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
                         }
+                    } else if (file.exists()) {
 
-                    } else if (args.length == 0) {
+                        YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+                        int amount = cfg.getInt("CoinsSystem.Coins");
 
-                        File file = new File("plugins//CoinsSystem//playerdata//" + p.getName() + ".yml");
-                        if (!file.exists()) {
-                            try {
-                                file.createNewFile();
-                                YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-                                cfg.addDefault("CoinsSystem.Coins", "0");
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        } else if (file.exists()) {
+                        p.sendMessage(Main.getInstance().getPrefix() + "§e" + Bukkit.getPlayer(args[0]).getName() + "'s §7Kontostand: §e" + amount);
+                    }
 
+                } else if (args.length == 0) {
+
+                    File file = new File("plugins//CoinsSystem//playerdata//" + p.getName() + ".yml");
+                    if (!file.exists()) {
+                        try {
+                            file.createNewFile();
                             YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-                            int amount = cfg.getInt("CoinsSystem.Coins");
-
-                            p.sendMessage(Main.getInstance().getPrefix() + "§7Kontostand: §e" + amount);
+                            cfg.addDefault("CoinsSystem.Coins", "0");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
                         }
+                    } else if (file.exists()) {
 
-                    } else
-                        p.sendMessage(Main.getInstance().getPrefix() + "§cBitte benutze: §e/coins <add, remove, set> <Spieler> <Zahlenwert>");
+                        YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+                        int amount = cfg.getInt("CoinsSystem.Coins");
 
-                }
+                        p.sendMessage(Main.getInstance().getPrefix() + "§7Kontostand: §e" + amount);
+                    }
+
+                } else
+                    p.sendMessage(Main.getInstance().getPrefix() + "§cBitte benutze: §e/coins <add, remove, set> <Spieler> <Zahlenwert>");
+
+            }
 
 
         }
@@ -154,7 +154,7 @@ public class CoinsCMD implements CommandExecutor {
         return false;
     }
 
-    public void addcoins(String p, int amount) {
+    public static void addcoins(String p, int amount) {
 
         File file = new File("plugins//CoinsSystem//playerdata//" + p + ".yml");
         if (!file.exists()) {
@@ -182,7 +182,7 @@ public class CoinsCMD implements CommandExecutor {
 
     }
 
-    public void setcoins(String p, int amount) {
+    public static void setcoins(String p, int amount) {
 
         File file = new File("plugins//CoinsSystem//playerdata//" + p + ".yml");
         if (!file.exists()) {
@@ -206,7 +206,7 @@ public class CoinsCMD implements CommandExecutor {
 
     }
 
-    public void removecoins(String p, int amount) {
+    public static void removecoins(String p, int amount) {
 
         File file = new File("plugins//CoinsSystem//playerdata//" + p + ".yml");
         if (!file.exists()) {
@@ -234,7 +234,7 @@ public class CoinsCMD implements CommandExecutor {
 
     }
 
-    public void getcoins(String p) {
+    public static void getcoins(String p) {
 
         File file = new File("plugins//CoinsSystem//playerdata//" + p + ".yml");
         if (!file.exists()) {
@@ -250,7 +250,7 @@ public class CoinsCMD implements CommandExecutor {
         YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
         int amount = cfg.getInt("CoinsSystem.Coins");
-        }
     }
+}
 
 
